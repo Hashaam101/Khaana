@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-forest: #1B512D;
+  --color-forest-dark: #143F22;
+  --color-forest-light: #237A3D;
+  --color-olivine: #ADC178;
+  --color-olivine-light: #C8D9A0;
+  --color-olivine-pale: #E8F0D8;
+  --color-cream: #F9F7F2;
+  --color-warm-gray: #6B7280;
+  --color-light-gray: #F3F4F6;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: #1a1a1a;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Hide scrollbar for horizontal scroll areas */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Mobile app container */
+.app-shell {
+  max-width: 430px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+  position: relative;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transitions for bottom nav */
+.nav-item {
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+.nav-item:active {
+  transform: scale(0.9);
+}
+
+/* Rating stars */
+.star-filled {
+  color: #F59E0B;
+}
+
+/* Store card hover */
+.store-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.store-card:active {
+  transform: scale(0.98);
+}
+
+/* Reserve button pulse */
+@keyframes subtle-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(27, 81, 45, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(27, 81, 45, 0); }
+}
+.pulse-btn {
+  animation: subtle-pulse 2s infinite;
+}
+
+/* Map placeholder styling */
+.map-grid {
+  background-image:
+    linear-gradient(rgba(173, 193, 120, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 193, 120, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Progress bar animation */
+@keyframes progress-fill {
+  from { width: 0%; }
+  to { width: var(--progress); }
+}
+.progress-bar {
+  animation: progress-fill 1s ease-out forwards;
+}
