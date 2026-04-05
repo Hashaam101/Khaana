@@ -26,16 +26,15 @@ export interface UserPreferences {
   mealTypes: string[];
 }
 
-const PHOTO_BASE =
-  "https://raw.githubusercontent.com/Hashaam101/Khaana/main/Khaana-Photoshoot";
+const PHOTO_BASE = "/Khaana-Photoshoot";
 
 export const photos = {
-  sushi: `${PHOTO_BASE}/1%20-%20Casual%20Sushi%20Dinner.png`,
-  desiDinner: `${PHOTO_BASE}/1.1%20-%20Casual%20Desi%20Dinner.png`,
-  bakery: `${PHOTO_BASE}/2%20-%20Kitchen%20Bakery%20Unpacking.png`,
-  desiUnpacking: `${PHOTO_BASE}/2.1%20-%20Kitchen%20Desi%20Unpacking.png`,
-  fatherDaughter: `${PHOTO_BASE}/3%20-%20Father-Daughter%20Unboxing.png`,
-  fatherDaughterDesi: `${PHOTO_BASE}/3.1%20-%20Father-Daughter%20Unboxing%20Desi.png`,
+  sushi: `${PHOTO_BASE}/1 - Casual Sushi Dinner.png`,
+  desiDinner: `${PHOTO_BASE}/1.1 - Casual Desi Dinner.png`,
+  bakery: `${PHOTO_BASE}/2 - Kitchen Bakery Unpacking.png`,
+  desiUnpacking: `${PHOTO_BASE}/2.1 - Kitchen Desi Unpacking.png`,
+  fatherDaughter: `${PHOTO_BASE}/3 - Father-Daughter Unboxing.png`,
+  fatherDaughterDesi: `${PHOTO_BASE}/3.1 - Father-Daughter Unboxing Desi.png`,
 };
 
 export const cities = [

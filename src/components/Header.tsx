@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { cities } from "@/lib/data";
 import { useTheme } from "@/components/ThemeProvider";
@@ -14,8 +15,14 @@ export default function Header() {
     <header className="sticky top-0 bg-khaana-surface/95 backdrop-blur-sm z-40 border-b border-khaana-border">
       <div className="max-w-lg mx-auto flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-khaana-dark rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">K</span>
+          <div className="w-8 h-8 rounded-lg overflow-hidden">
+            <Image
+              src="/Khaana-Photoshoot/1.1 - Casual Desi Dinner.png"
+              alt="Khaana logo"
+              width={32}
+              height={32}
+              className="object-cover w-full h-full"
+            />
           </div>
           <span className="font-bold text-lg text-khaana-dark dark:text-khaana-light">
             Khaana
