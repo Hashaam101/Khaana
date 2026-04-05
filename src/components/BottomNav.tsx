@@ -8,8 +8,9 @@ export default function BottomNav() {
   const pathname = usePathname();
   const { theme } = useTheme();
 
-  const activeColor = theme === "dark" ? "#ADC178" : "#1B512D";
-  const inactiveColor = theme === "dark" ? "#9CA38B" : "#6B6B6B";
+  void theme;
+  const activeColor = "#ADC178";
+  const inactiveColor = "rgba(255,255,255,0.45)";
 
   const tabs = [
     {
@@ -52,7 +53,7 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-khaana-surface border-t border-khaana-border z-50">
+    <nav className="fixed bottom-0 left-0 right-0 bg-khaana-dark z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
       <div className="max-w-lg mx-auto flex justify-around items-center h-16">
         {tabs.map((tab) => {
           const active =
@@ -67,7 +68,7 @@ export default function BottomNav() {
             >
               {tab.icon(active)}
               <span
-                className={`text-[10px] font-medium ${active ? "text-khaana-dark dark:text-khaana-light" : "text-khaana-muted"}`}
+                className={`text-[10px] font-medium ${active ? "text-khaana-light" : "text-white/45"}`}
               >
                 {tab.label}
               </span>

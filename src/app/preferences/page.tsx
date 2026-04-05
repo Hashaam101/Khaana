@@ -27,7 +27,7 @@ export default function PreferencesPage() {
   return (
     <div className="min-h-screen bg-khaana-surface">
       {/* Header */}
-      <header className="sticky top-0 bg-khaana-surface/95 backdrop-blur-sm z-40 border-b border-khaana-border">
+      <header className="sticky top-0 bg-khaana-dark z-40 shadow-md">
         <div className="max-w-lg mx-auto flex items-center justify-between px-4 py-3">
           <Link
             href="/"
@@ -37,14 +37,14 @@ export default function PreferencesPage() {
               width="20"
               height="20"
               fill="none"
-              stroke="currentColor"
+              stroke="#ADC178"
               viewBox="0 0 24 24"
               strokeWidth={2}
             >
               <path d="M15 19l-7-7 7-7" />
             </svg>
           </Link>
-          <h1 className="font-bold text-base">Food Preferences</h1>
+          <h1 className="font-bold text-base text-white">Food Preferences</h1>
           <div className="w-8" />
         </div>
       </header>
@@ -248,10 +248,10 @@ export default function PreferencesPage() {
       </div>
 
       {/* Save button */}
-      <div className="sticky bottom-0 bg-khaana-surface border-t border-khaana-border p-4">
+      <div className="sticky bottom-0 bg-khaana-dark p-4 shadow-[0_-2px_10px_rgba(0,0,0,0.15)]">
         <button
           onClick={() => setSaved(true)}
-          className="w-full bg-khaana-dark text-white py-3.5 rounded-xl font-semibold text-sm active:scale-[0.98] transition-transform"
+          className="w-full bg-khaana-light text-khaana-dark py-3.5 rounded-xl font-semibold text-sm active:scale-[0.98] transition-transform hover:brightness-110"
         >
           Save Preferences
         </button>

@@ -81,25 +81,25 @@ export default function StoreDetail({
         />
         <Link
           href="/"
-          className="absolute top-4 left-4 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow"
+          className="absolute top-4 left-4 w-9 h-9 bg-khaana-dark/80 rounded-full flex items-center justify-center shadow"
         >
           <svg
             width="18"
             height="18"
             fill="none"
-            stroke="#1A1A1A"
+            stroke="#ADC178"
             viewBox="0 0 24 24"
             strokeWidth={2}
           >
             <path d="M15 19l-7-7 7-7" />
           </svg>
         </Link>
-        <button className="absolute top-4 right-4 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center shadow">
+        <button className="absolute top-4 right-4 w-9 h-9 bg-khaana-dark/80 rounded-full flex items-center justify-center shadow">
           <svg
             width="18"
             height="18"
             fill="none"
-            stroke="#1A1A1A"
+            stroke="#ADC178"
             viewBox="0 0 24 24"
             strokeWidth={2}
           >
@@ -277,10 +277,10 @@ export default function StoreDetail({
       </div>
 
       {/* Reserve button - sticky footer */}
-      <div className="sticky bottom-0 bg-khaana-surface border-t border-khaana-border p-4 mt-6">
+      <div className="sticky bottom-0 bg-khaana-dark p-4 mt-6 shadow-[0_-2px_10px_rgba(0,0,0,0.15)]">
         <button
           onClick={() => setReserved(true)}
-          className="w-full bg-khaana-dark text-white py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform"
+          className="w-full bg-khaana-light text-khaana-dark py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-transform hover:brightness-110"
         >
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path

@@ -12,19 +12,17 @@ export default function Header() {
   const { theme, toggle } = useTheme();
 
   return (
-    <header className="sticky top-0 bg-khaana-surface/95 backdrop-blur-sm z-40 border-b border-khaana-border">
+    <header className="sticky top-0 bg-khaana-dark z-40 shadow-md">
       <div className="max-w-lg mx-auto flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg overflow-hidden">
-            <Image
-              src="/Khaana-Photoshoot/1.1 - Casual Desi Dinner.png"
-              alt="Khaana logo"
-              width={32}
-              height={32}
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <span className="font-bold text-lg text-khaana-dark dark:text-khaana-light">
+          <Image
+            src="/khaana-logo.png"
+            alt="Khaana logo"
+            width={32}
+            height={32}
+            className="rounded-lg"
+          />
+          <span className="font-bold text-lg text-white">
             Khaana
           </span>
         </div>
@@ -34,7 +32,7 @@ export default function Header() {
           <div className="relative">
             <button
               onClick={() => setShowCities(!showCities)}
-              className="flex items-center gap-1 text-sm text-khaana-muted"
+              className="flex items-center gap-1 text-sm text-khaana-light"
             >
               <svg
                 width="14"
@@ -70,7 +68,7 @@ export default function Header() {
                     }}
                     className={`w-full text-left px-4 py-2 text-sm hover:bg-khaana-cream transition-colors ${
                       c === city
-                        ? "text-khaana-dark dark:text-khaana-light font-semibold"
+                        ? "text-khaana-dark dark:text-khaana-light font-semibold bg-khaana-light/10"
                         : "text-khaana-text"
                     }`}
                   >
@@ -84,7 +82,7 @@ export default function Header() {
           {/* Theme toggle */}
           <button
             onClick={toggle}
-            className="w-8 h-8 rounded-full bg-khaana-cream flex items-center justify-center transition-colors"
+            className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center transition-colors hover:bg-white/25"
             aria-label="Toggle theme"
           >
             {theme === "light" ? (
@@ -92,7 +90,7 @@ export default function Header() {
                 width="16"
                 height="16"
                 fill="none"
-                stroke="#1B512D"
+                stroke="#ADC178"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
               >
@@ -116,16 +114,15 @@ export default function Header() {
           {/* Preferences */}
           <Link
             href="/preferences"
-            className="w-8 h-8 rounded-full bg-khaana-cream flex items-center justify-center"
+            className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center hover:bg-white/25 transition-colors"
           >
             <svg
               width="18"
               height="18"
               fill="none"
-              stroke="#1B512D"
+              stroke="#ADC178"
               viewBox="0 0 24 24"
               strokeWidth={2}
-              className="dark:stroke-khaana-light"
             >
               <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
