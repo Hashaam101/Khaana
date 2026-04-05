@@ -83,7 +83,7 @@ export default function BrowsePage() {
           )}
         </div>
       ) : (
-        <div className="mx-4 mt-4 rounded-2xl overflow-hidden border border-khaana-border h-[calc(100vh-220px)]">
+        <div className="mx-4 mt-4 rounded-2xl overflow-hidden border border-khaana-border" style={{ height: "calc(100dvh - 260px)" }}>
           <StoreMap
             stores={filtered}
             center={cityCoords.Islamabad}
@@ -91,8 +91,6 @@ export default function BrowsePage() {
           />
         </div>
       )}
-
-      <div className="h-8" />
     </>
   );
 }
