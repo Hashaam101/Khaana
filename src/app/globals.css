@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-khaana-dark: #1B512D;
+  --color-khaana-light: #ADC178;
+  --color-khaana-cream: #F5F0E8;
+  --color-khaana-bg: #FAFAF7;
+  --color-khaana-text: #1A1A1A;
+  --color-khaana-muted: #6B6B6B;
+  --color-khaana-border: #E5E5E0;
+  --color-khaana-surface: #FFFFFF;
+  --color-khaana-card: #FFFFFF;
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark mode overrides */
+.dark {
+  --color-khaana-cream: #1E2A1F;
+  --color-khaana-bg: #0F1610;
+  --color-khaana-text: #E8E8E3;
+  --color-khaana-muted: #9CA38B;
+  --color-khaana-border: #2A3A2C;
+  --color-khaana-surface: #161E17;
+  --color-khaana-card: #1A231B;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-khaana-bg);
+  color: var(--color-khaana-text);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Hide scrollbar for horizontal scroll containers */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
