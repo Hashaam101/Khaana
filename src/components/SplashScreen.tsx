@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { KhaanaIcon } from "./KhaanaLogo";
 
 export default function SplashScreen() {
   const [phase, setPhase] = useState<"visible" | "fading" | "gone">("visible");
@@ -73,18 +74,18 @@ export default function SplashScreen() {
         gap: "24px",
         animation: "splashContentIn 0.8s ease-out both",
       }}>
-        {/* Animated leaf icon */}
+        {/* Logo icon */}
         <div style={{
           position: "relative",
-          width: "72px",
-          height: "72px",
+          width: "88px",
+          height: "88px",
           animation: "splashIconIn 0.6s ease-out both",
           animationDelay: "0.2s",
         }}>
           {/* Outer ring */}
           <div style={{
             position: "absolute",
-            inset: 0,
+            inset: "-8px",
             borderRadius: "50%",
             border: "2px solid rgba(173,193,120,0.3)",
             animation: "splashRingSpin 4s linear infinite",
@@ -104,37 +105,19 @@ export default function SplashScreen() {
           {/* Pulsing circle */}
           <div style={{
             position: "absolute",
-            inset: "8px",
+            inset: "-4px",
             borderRadius: "50%",
             background: "rgba(173,193,120,0.1)",
             animation: "splashPulse 2s ease-in-out infinite",
           }} />
 
-          {/* Leaf SVG */}
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            style={{
-              position: "absolute",
-              inset: "18px",
-              width: "36px",
-              height: "36px",
-              animation: "splashLeafBounce 2s ease-in-out infinite",
-              animationDelay: "0.5s",
-            }}
-          >
-            <path
-              d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22.23C7.57 17.62 10.48 13.34 17 12V15L22 8.5L17 2V5C17 5 17 5.33 17 8Z"
-              fill="#ADC178"
-            />
-            <path
-              d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22.23C7.57 17.62 10.48 13.34 17 12"
-              stroke="#E8F0D8"
-              strokeWidth="0.5"
-              strokeLinecap="round"
-              opacity="0.6"
-            />
-          </svg>
+          {/* Khaana Logo Icon */}
+          <div style={{
+            animation: "splashLeafBounce 2s ease-in-out infinite",
+            animationDelay: "0.5s",
+          }}>
+            <KhaanaIcon size="lg" />
+          </div>
         </div>
 
         {/* Brand name */}
