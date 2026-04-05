@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import BagCard from "@/components/BagCard";
-import { stores } from "@/lib/data";
+import { stores, cityCoords } from "@/lib/data";
+
+const StoreMap = dynamic(() => import("@/components/StoreMap"), { ssr: false });
 
 export default function BrowsePage() {
   const [search, setSearch] = useState("");
@@ -80,25 +83,12 @@ export default function BrowsePage() {
           )}
         </div>
       ) : (
-        <div className="mx-4 mt-4 rounded-2xl overflow-hidden border border-khaana-border bg-khaana-cream h-80 flex items-center justify-center">
-          <div className="text-center text-khaana-muted">
-            <svg
-              width="48"
-              height="48"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              className="mx-auto mb-3 opacity-50"
-            >
-              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <p className="text-sm font-medium">Map view coming soon</p>
-            <p className="text-xs mt-1">
-              We&apos;re adding interactive maps for your city
-            </p>
-          </div>
+        <div className="mx-4 mt-4 rounded-2xl overflow-hidden border border-khaana-border h-[calc(100vh-220px)]">
+          <StoreMap
+            stores={filtered}
+            center={cityCoords.Islamabad}
+            zoom={12}
+          />
         </div>
       )}
 

@@ -16,6 +16,8 @@ export interface Store {
   description: string;
   items: string[];
   isFavourite?: boolean;
+  lat: number;
+  lng: number;
 }
 
 export interface UserPreferences {
@@ -47,6 +49,17 @@ export const cities = [
   "Multan",
   "Quetta",
 ];
+
+export const cityCoords: Record<string, [number, number]> = {
+  Karachi: [24.8607, 67.0011],
+  Lahore: [31.5204, 74.3587],
+  Islamabad: [33.6844, 73.0479],
+  Rawalpindi: [33.5651, 73.0169],
+  Faisalabad: [31.4504, 73.135],
+  Peshawar: [34.0151, 71.5249],
+  Multan: [30.1575, 71.5249],
+  Quetta: [30.1798, 66.975],
+};
 
 export const categories = [
   "All",
@@ -97,6 +110,8 @@ export const stores: Store[] = [
     description:
       "Save delicious leftover biryani, karahi, and other desi favourites from going to waste. Each surprise bag contains a generous portion of our signature dishes.",
     items: ["Chicken Biryani", "Raita", "Salad", "Naan"],
+    lat: 33.7215,
+    lng: 73.0433,
   },
   {
     id: "2",
@@ -116,6 +131,8 @@ export const stores: Store[] = [
     description:
       "Rescue fresh bakery items before they go unsold. Get a surprise mix of our famous breads, pastries, and cakes at a fraction of the price.",
     items: ["Croissants", "Puff Pastry", "Cake Slices", "Fresh Bread"],
+    lat: 33.7070,
+    lng: 73.0551,
   },
   {
     id: "3",
@@ -135,6 +152,8 @@ export const stores: Store[] = [
     description:
       "Enjoy premium BBQ items at a great price. Our surprise bags include a mix of tikka, kebabs, and sides that are too good to throw away.",
     items: ["Chicken Tikka", "Seekh Kebab", "Naan", "Chutney"],
+    lat: 33.7294,
+    lng: 73.0685,
   },
   {
     id: "4",
@@ -154,6 +173,8 @@ export const stores: Store[] = [
     description:
       "Authentic desi home-style cooking saved from waste. Get a hearty surprise bag with dal, sabzi, rice, and fresh naan.",
     items: ["Dal Makhni", "Aloo Gobi", "Jeera Rice", "Tandoori Naan"],
+    lat: 33.5965,
+    lng: 73.0479,
   },
   {
     id: "5",
@@ -173,6 +194,8 @@ export const stores: Store[] = [
     description:
       "Grab leftover rolls, shawarmas, and wraps at amazing prices. Perfect for a late-night snack that saves food from the bin.",
     items: ["Chicken Roll", "Shawarma", "Fries", "Drink"],
+    lat: 33.6937,
+    lng: 73.0300,
   },
   {
     id: "6",
@@ -192,5 +215,7 @@ export const stores: Store[] = [
     description:
       "Premium Pakistani sweets and desserts at unbeatable prices. Our surprise bags are packed with gulab jamun, barfi, jalebi, and more.",
     items: ["Gulab Jamun", "Barfi", "Jalebi", "Ras Malai"],
+    lat: 33.7380,
+    lng: 73.0844,
   },
 ];
