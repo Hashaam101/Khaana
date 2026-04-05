@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown, Bell, CalendarCheck, ChevronRight } from "lucide-react";
 import BottomNav from "@/components/BottomNav";
@@ -8,17 +8,12 @@ import StoreCard from "@/components/StoreCard";
 import CategoryTabs from "@/components/CategoryTabs";
 import { KhaanaLogo } from "@/components/KhaanaLogo";
 import { DiscoverPageSkeleton } from "@/components/Skeleton";
-import { stores, monthlyPlans } from "@/data/stores";
+import { useRandomData } from "@/context/RandomDataContext";
 
 export default function DiscoverPage() {
+  const { stores, monthlyPlans } = useRandomData();
   const [activeCategory, setActiveCategory] = useState("all");
   const [showNotification, setShowNotification] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 800);
-    return () => clearTimeout(timer);
-  }, []);
 
   const filteredStores =
     activeCategory === "all"
@@ -32,37 +27,31 @@ export default function DiscoverPage() {
     .slice()
     .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
 
-  if (isLoading) {
-    return (
-      <>
+  return (
+    <div className="flex flex-col min-h-dvh bg-surface relative">
+      <div className="skeleton-overlay">
         <DiscoverPageSkeleton />
         <BottomNav />
-      </>
-    );
-  }
-
-  return (
-    <div className="flex flex-col min-h-screen bg-white">
+      </div>
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white">
+      <div className="sticky top-0 z-40 bg-surface">
         <div className="flex items-center justify-between px-4 pt-4 pb-2">
           <KhaanaLogo size="sm" />
           <button
             onClick={() => setShowNotification(!showNotification)}
-            className="relative p-2 rounded-full hover:bg-gray-100"
+            className="relative p-2 rounded-full hover:bg-surface-tertiary"
           >
-            <Bell size={22} className="text-gray-700" />
+            <Bell size={22} className="text-content-secondary" />
             <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
           </button>
         </div>
 
         {/* Location */}
-        <button className="flex items-center gap-1 px-4 pb-2 text-sm">
+        <div className="flex items-center gap-1 px-4 pb-2 text-sm">
           <span className="text-forest font-bold text-base">📍</span>
-          <span className="text-gray-500">Current location</span>
-          <span className="font-semibold text-gray-900">Islamabad</span>
-          <ChevronDown size={16} className="text-gray-400" />
-        </button>
+          <span className="text-content-tertiary">Current location</span>
+          <span className="font-semibold text-content">Islamabad</span>
+        </div>
 
         {/* Category Tabs */}
         <CategoryTabs active={activeCategory} onChange={setActiveCategory} />
@@ -76,14 +65,14 @@ export default function DiscoverPage() {
             <p className="text-sm font-semibold text-forest">
               New bags available!
             </p>
-            <p className="text-xs text-gray-600 mt-0.5">
+            <p className="text-xs text-content-secondary mt-0.5">
               3 new Surprise Bags just dropped near F-7. Grab them before
               they&apos;re gone!
             </p>
           </div>
           <button
             onClick={() => setShowNotification(false)}
-            className="text-gray-400 text-lg leading-none"
+            className="text-content-muted text-lg leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-tertiary -mr-1"
           >
             ×
           </button>
@@ -91,17 +80,17 @@ export default function DiscoverPage() {
       )}
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto pb-4">
+      <div className="flex-1 overflow-y-auto pb-20">
         {/* Recommended Section */}
         {recommended.length > 0 && (
           <section className="mb-6">
             <div className="flex items-center justify-between px-4 mb-3">
-              <h2 className="font-bold text-base text-gray-900">
+              <h2 className="font-bold text-base text-content">
                 Recommended for you
               </h2>
-              <button className="text-sm font-medium text-forest">
+              <Link href="/browse" className="text-sm font-medium text-forest">
                 See all
-              </button>
+              </Link>
             </div>
             <div className="flex gap-3 overflow-x-auto hide-scrollbar px-4">
               {recommended.map((store) => (
@@ -139,8 +128,8 @@ export default function DiscoverPage() {
         {/* Nearby Section */}
         <section>
           <div className="flex items-center justify-between px-4 mb-3">
-            <h2 className="font-bold text-base text-gray-900">Nearby</h2>
-            <button className="text-sm font-medium text-forest">See all</button>
+            <h2 className="font-bold text-base text-content">Nearby</h2>
+            <Link href="/browse" className="text-sm font-medium text-forest">See all</Link>
           </div>
           <div className="flex flex-col gap-3 px-4">
             {nearby.map((store) => (
@@ -153,7 +142,7 @@ export default function DiscoverPage() {
         {filteredStores.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 px-8">
             <span className="text-5xl mb-4">🔍</span>
-            <p className="text-gray-500 text-center">
+            <p className="text-content-tertiary text-center">
               No Surprise Bags available in this category right now. Check back
               later!
             </p>

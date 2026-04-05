@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Sour_Gummy } from "next/font/google";
 import "./globals.css";
 import ClientShell from "@/components/ClientShell";
 
@@ -13,7 +13,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const sourGummy = Sour_Gummy({
+  variable: "--font-sour-gummy",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://khaana-com.vercel.app"),
   title: "Khaana - Save Food, Save Money",
   description:
     "Rescue delicious surplus food from restaurants, bakeries, and supermarkets in Islamabad at great prices.",
@@ -70,9 +77,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${sourGummy.variable} antialiased`}
     >
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+      </head>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: `try{var n=performance.getEntriesByType('navigation')[0];if(n&&n.type==='reload'&&location.hash==='#nav')history.replaceState(null,'',location.pathname+location.search)}catch(e){}` }} />
         <ClientShell>{children}</ClientShell>
       </body>
     </html>

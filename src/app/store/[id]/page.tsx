@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -17,32 +17,23 @@ import {
 } from "lucide-react";
 import { StoreDetailSkeleton } from "@/components/Skeleton";
 import { RestaurantLogo } from "@/components/RestaurantLogos";
-import { stores, monthlyPlans } from "@/data/stores";
+import { useRandomData } from "@/context/RandomDataContext";
 
 export default function StoreDetailPage() {
+  const { stores, monthlyPlans } = useRandomData();
   const params = useParams();
   const router = useRouter();
   const store = stores.find((s) => s.id === params.id);
   const [isFavorite, setIsFavorite] = useState(store?.isFavorite ?? false);
   const [quantity, setQuantity] = useState(1);
   const [showReserveModal, setShowReserveModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
 
   if (!store) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500">Store not found</p>
+      <div className="flex items-center justify-center min-h-dvh">
+        <p className="text-content-tertiary">Store not found</p>
       </div>
     );
-  }
-
-  if (isLoading) {
-    return <StoreDetailSkeleton />;
   }
 
   const handleReserve = () => {
@@ -53,9 +44,12 @@ export default function StoreDetailPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white relative">
+    <div className="flex flex-col min-h-dvh bg-surface relative">
+      <div className="skeleton-overlay">
+        <StoreDetailSkeleton />
+      </div>
       {/* Hero Image */}
-      <div className="h-56 w-full relative bg-gray-100">
+      <div className="h-56 w-full relative bg-surface-tertiary">
         <Image
           src={store.imageUrl}
           alt={store.name}
@@ -71,18 +65,18 @@ export default function StoreDetailPage() {
 
         <button
           onClick={() => router.back()}
-          className="absolute top-4 left-4 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-sm z-10"
+          className="absolute top-4 left-4 p-2.5 bg-surface/90 backdrop-blur-sm rounded-full shadow-sm z-20"
         >
-          <ArrowLeft size={20} className="text-gray-700" />
+          <ArrowLeft size={20} className="text-content-secondary" />
         </button>
         <button
           onClick={() => setIsFavorite(!isFavorite)}
-          className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-sm z-10"
+          className="absolute top-4 right-4 p-2.5 bg-surface/90 backdrop-blur-sm rounded-full shadow-sm z-20"
         >
           <Heart
             size={20}
             className={
-              isFavorite ? "text-red-500 fill-red-500" : "text-gray-700"
+              isFavorite ? "text-red-500 fill-red-500" : "text-content-secondary"
             }
           />
         </button>
@@ -100,9 +94,9 @@ export default function StoreDetailPage() {
           <div className="flex items-start gap-3">
             <RestaurantLogo storeId={store.id} size={48} className="flex-shrink-0" />
             <div className="flex-1">
-              <h1 className="text-xl font-bold text-gray-900">{store.name}</h1>
+              <h1 className="text-xl font-bold text-content">{store.name}</h1>
               <div className="flex items-center gap-2 mt-1">
-                <span className="flex items-center gap-1 text-sm text-gray-500">
+                <span className="flex items-center gap-1 text-sm text-content-tertiary">
                   <ShoppingBag size={14} />
                   {store.category}
                 </span>
@@ -110,16 +104,16 @@ export default function StoreDetailPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between mt-4 bg-gray-50 rounded-xl p-3">
+          <div className="flex items-center justify-between mt-4 bg-surface-secondary rounded-xl p-3">
             <div className="flex items-center gap-1">
               <Star size={16} className="star-filled fill-amber-400" />
-              <span className="font-semibold">{store.rating}</span>
-              <span className="text-sm text-gray-500">
+              <span className="font-semibold text-content">{store.rating}</span>
+              <span className="text-sm text-content-tertiary">
                 ({store.reviewCount})
               </span>
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-gray-400 line-through text-sm">
+              <span className="text-content-muted line-through text-sm">
                 Rs. {store.originalPrice.toLocaleString()}
               </span>
               <span className="text-xl font-bold text-forest">
@@ -131,61 +125,66 @@ export default function StoreDetailPage() {
           <div className="flex items-center gap-3 mt-3 p-3 bg-olivine-pale rounded-xl">
             <Clock size={18} className="text-forest flex-shrink-0" />
             <div>
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-content">
                 Pick up: {store.pickupTime}
               </p>
-              <p className="text-xs text-gray-600">{store.pickupDay}</p>
+              <p className="text-xs text-content-secondary">{store.pickupDay}</p>
             </div>
             <span
               className={`ml-auto text-xs font-semibold px-2 py-0.5 rounded-full ${
                 store.pickupDay === "Today"
                   ? "bg-forest text-white"
-                  : "bg-gray-200 text-gray-700"
+                  : "bg-surface-inset text-content-secondary"
               }`}
             >
               {store.pickupDay}
             </span>
           </div>
 
-          <button className="w-full flex items-center gap-3 mt-3 p-3 bg-gray-50 rounded-xl text-left">
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.address)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full flex items-center gap-3 mt-3 p-3 bg-surface-secondary rounded-xl text-left"
+          >
             <MapPin size={18} className="text-forest flex-shrink-0" />
             <div className="flex-1">
               <p className="text-sm font-medium text-forest">
                 {store.address}
               </p>
-              <p className="text-xs text-gray-500">
-                More information about this store
+              <p className="text-xs text-content-tertiary">
+                Tap to open in Maps
               </p>
             </div>
-            <ChevronRight size={16} className="text-gray-400" />
-          </button>
+            <ChevronRight size={16} className="text-content-muted" />
+          </a>
         </div>
 
-        <div className="px-4 py-3 border-t border-gray-100">
-          <h2 className="font-bold text-base mb-2">What you could get</h2>
-          <p className="text-sm text-gray-600 leading-relaxed">
+        <div className="px-4 py-3 border-t border-edge">
+          <h2 className="font-bold text-base text-content mb-2">What you could get</h2>
+          <p className="text-sm text-content-secondary leading-relaxed">
             {store.description}
           </p>
           <div className="flex items-center gap-1 mt-2">
-            <Info size={14} className="text-gray-400" />
-            <p className="text-xs text-gray-400">
+            <Info size={14} className="text-content-muted" />
+            <p className="text-xs text-content-muted">
               Contents are a surprise and vary daily
             </p>
           </div>
           <div className="mt-2">
-            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+            <span className="text-xs bg-surface-tertiary text-content-secondary px-2 py-1 rounded-full">
               {store.category}
             </span>
           </div>
         </div>
 
         {/* Monthly Plans */}
-        <div className="px-4 py-3 border-t border-gray-100">
+        <div className="px-4 py-3 border-t border-edge">
           <div className="flex items-center gap-2 mb-1">
             <CalendarCheck size={18} className="text-forest" />
-            <h2 className="font-bold text-base">Monthly Plans</h2>
+            <h2 className="font-bold text-base text-content">Monthly Plans</h2>
           </div>
-          <p className="text-xs text-gray-500 mb-3">
+          <p className="text-xs text-content-tertiary mb-3">
             Subscribe and save more with regular pickups from {store.name}
           </p>
           <div className="flex gap-2 overflow-x-auto hide-scrollbar -mx-1 px-1 pb-1">
@@ -195,7 +194,7 @@ export default function StoreDetailPage() {
                 className={`flex-shrink-0 w-[155px] rounded-xl border p-3 ${
                   plan.name === "Regular"
                     ? "border-forest bg-olivine-pale"
-                    : "border-gray-200 bg-white"
+                    : "border-edge-strong bg-surface"
                 }`}
               >
                 {plan.name === "Regular" && (
@@ -203,11 +202,11 @@ export default function StoreDetailPage() {
                     <Zap size={8} /> POPULAR
                   </span>
                 )}
-                <p className="font-bold text-sm text-gray-900">{plan.name}</p>
-                <p className="text-[11px] text-gray-500 mt-0.5">{plan.description}</p>
+                <p className="font-bold text-sm text-content">{plan.name}</p>
+                <p className="text-[11px] text-content-tertiary mt-0.5">{plan.description}</p>
                 <p className="text-lg font-bold text-forest mt-2">
                   Rs. {plan.pricePerMonth.toLocaleString()}
-                  <span className="text-[10px] font-normal text-gray-400">/mo</span>
+                  <span className="text-[10px] font-normal text-content-muted">/mo</span>
                 </p>
                 <p className="text-[10px] text-forest font-semibold">
                   Save {plan.savingsPercent}% vs. one-time
@@ -217,10 +216,10 @@ export default function StoreDetailPage() {
           </div>
         </div>
 
-        <div className="px-4 py-3 border-t border-gray-100">
-          <h2 className="font-bold text-base mb-3">Overall experience</h2>
+        <div className="px-4 py-3 border-t border-edge">
+          <h2 className="font-bold text-base text-content mb-3">Overall experience</h2>
           <div className="flex items-center gap-4 mb-4">
-            <span className="text-3xl font-bold">{store.rating}</span>
+            <span className="text-3xl font-bold text-content">{store.rating}</span>
             <div className="flex gap-0.5">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star
@@ -229,27 +228,27 @@ export default function StoreDetailPage() {
                   className={
                     star <= Math.round(store.rating)
                       ? "star-filled fill-amber-400"
-                      : "text-gray-200"
+                      : "text-content-faint"
                   }
                 />
               ))}
             </div>
           </div>
-          <p className="text-xs text-gray-500 mb-4">
+          <p className="text-xs text-content-tertiary mb-4">
             Based on {store.reviewCount} recent reviews
           </p>
 
           <div className="space-y-3">
             <div>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm text-gray-700">
+                <span className="text-sm text-content-secondary">
                   Pickup experience
                 </span>
-                <span className="text-sm font-semibold">
+                <span className="text-sm font-semibold text-content">
                   {store.pickupRating}
                 </span>
               </div>
-              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-2 bg-surface-tertiary rounded-full overflow-hidden">
                 <div
                   className="h-full bg-forest rounded-full progress-bar"
                   style={
@@ -262,12 +261,12 @@ export default function StoreDetailPage() {
             </div>
             <div>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm text-gray-700">Value for money</span>
-                <span className="text-sm font-semibold">
+                <span className="text-sm text-content-secondary">Value for money</span>
+                <span className="text-sm font-semibold text-content">
                   {store.valueRating}
                 </span>
               </div>
-              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-2 bg-surface-tertiary rounded-full overflow-hidden">
                 <div
                   className="h-full bg-olivine rounded-full progress-bar"
                   style={
@@ -283,22 +282,22 @@ export default function StoreDetailPage() {
       </div>
 
       {/* Reserve Button */}
-      <div className="sticky bottom-0 bg-white border-t border-gray-100 px-4 py-3 z-50">
+      <div className="sticky bottom-0 bg-surface border-t border-edge px-4 py-3 z-50">
         <div className="flex items-center gap-3 mb-3">
-          <span className="text-sm text-gray-600">Quantity:</span>
+          <span className="text-sm text-content-secondary">Quantity:</span>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 font-medium"
+              className="w-11 h-11 rounded-full border-2 border-edge-stronger flex items-center justify-center text-content-secondary font-bold text-lg active:bg-surface-tertiary active:scale-95 transition-all"
             >
               −
             </button>
-            <span className="w-8 text-center font-semibold">{quantity}</span>
+            <span className="w-8 text-center font-bold text-lg text-content">{quantity}</span>
             <button
               onClick={() =>
                 setQuantity(Math.min(store.available, quantity + 1))
               }
-              className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 font-medium"
+              className="w-11 h-11 rounded-full border-2 border-edge-stronger flex items-center justify-center text-content-secondary font-bold text-lg active:bg-surface-tertiary active:scale-95 transition-all"
             >
               +
             </button>
@@ -317,16 +316,16 @@ export default function StoreDetailPage() {
 
       {/* Reserve Modal */}
       {showReserveModal && (
-        <div className="fixed inset-0 bg-black/40 z-[100] flex items-center justify-center">
-          <div className="bg-white rounded-2xl p-6 mx-8 text-center">
+        <div className="fixed inset-0 bg-black/40 z-[100] flex items-center justify-center px-6">
+          <div className="bg-surface rounded-2xl p-6 w-full max-w-[350px] text-center">
             <div className="w-16 h-16 bg-olivine-pale rounded-full flex items-center justify-center mx-auto mb-3">
               <span className="text-3xl">✅</span>
             </div>
-            <h3 className="font-bold text-lg">Reserving your bag...</h3>
-            <p className="text-sm text-gray-500 mt-1">
+            <h3 className="font-bold text-lg text-content">Reserving your bag...</h3>
+            <p className="text-sm text-content-tertiary mt-1">
               {quantity}x Surprise Bag from {store.name}
             </p>
-            <div className="mt-4 h-1 bg-gray-100 rounded-full overflow-hidden">
+            <div className="mt-4 h-1 bg-surface-tertiary rounded-full overflow-hidden">
               <div className="h-full bg-forest rounded-full animate-pulse w-3/4" />
             </div>
           </div>

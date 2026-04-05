@@ -375,6 +375,85 @@ export interface MonthlyPlan {
   description: string;
 }
 
+// Impact page data
+export interface WeeklyDay {
+  day: string;
+  meals: number;
+  date: string;
+}
+
+export interface MonthlyImpact {
+  month: string;
+  meals: number;
+  co2: number;
+  saved: number;
+}
+
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  earned: boolean;
+  date?: string;
+  progress?: number;
+  target?: number;
+}
+
+export interface CommunityImpact {
+  totalMealsRescued: number;
+  totalUsers: number;
+  totalCo2Saved: number;
+  totalMoneySaved: number;
+  topCategory: string;
+  activeStores: number;
+}
+
+export const weeklyActivity: WeeklyDay[] = [
+  { day: "Mon", meals: 2, date: "31 Mar" },
+  { day: "Tue", meals: 0, date: "1 Apr" },
+  { day: "Wed", meals: 1, date: "2 Apr" },
+  { day: "Thu", meals: 3, date: "3 Apr" },
+  { day: "Fri", meals: 0, date: "4 Apr" },
+  { day: "Sat", meals: 2, date: "5 Apr" },
+  { day: "Sun", meals: 1, date: "6 Apr" },
+];
+
+export const monthlyHistory: MonthlyImpact[] = [
+  { month: "Mar 2026", meals: 14, co2: 9.6, saved: 3800 },
+  { month: "Feb 2026", meals: 10, co2: 6.8, saved: 2550 },
+  { month: "Jan 2026", meals: 6, co2: 4.1, saved: 1400 },
+  { month: "Dec 2025", meals: 4, co2: 2.9, saved: 1000 },
+];
+
+export const achievements: Achievement[] = [
+  { id: "first-rescue", name: "First Rescue", description: "Rescued your first meal", icon: "🌱", earned: true, date: "Dec 2025" },
+  { id: "regular-saver", name: "Regular Saver", description: "Rescued 10 meals", icon: "⭐", earned: true, date: "Jan 2026" },
+  { id: "eco-warrior", name: "Eco Warrior", description: "Saved 10kg CO₂", icon: "🌍", earned: true, date: "Feb 2026" },
+  { id: "food-hero", name: "Food Hero", description: "Rescued 25 meals", icon: "🦸", earned: true, date: "Mar 2026" },
+  { id: "money-master", name: "Money Master", description: "Saved Rs. 5,000", icon: "💰", earned: true, date: "Mar 2026" },
+  { id: "gold-rescuer", name: "Gold Rescuer", description: "Rescue 50 meals", icon: "🏆", earned: false, progress: 34, target: 50 },
+  { id: "planet-guardian", name: "Planet Guardian", description: "Save 50kg CO₂", icon: "🌿", earned: false, progress: 23, target: 50 },
+  { id: "super-saver", name: "Super Saver", description: "Save Rs. 25,000", icon: "💎", earned: false, progress: 8750, target: 25000 },
+];
+
+export const communityImpact: CommunityImpact = {
+  totalMealsRescued: 12450,
+  totalUsers: 2340,
+  totalCo2Saved: 8500,
+  totalMoneySaved: 3200000,
+  topCategory: "Meals",
+  activeStores: 48,
+};
+
+export const environmentalEquivalents = [
+  { value: "116", label: "cups of chai", icon: "☕", description: "The energy saved equals brewing 116 cups" },
+  { value: "12", label: "car trips avoided", icon: "🚗", description: "From Islamabad to Rawalpindi and back" },
+  { value: "3", label: "trees worth", icon: "🌳", description: "CO₂ absorbed by 3 trees in a month" },
+  { value: "340", label: "litres of water", icon: "💧", description: "Water saved from food production" },
+  { value: "17", label: "kg food waste", icon: "🗑️", description: "Diverted from landfills" },
+];
+
 export const monthlyPlans: MonthlyPlan[] = [
   {
     name: "Starter",

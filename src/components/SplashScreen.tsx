@@ -1,46 +1,12 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { KhaanaIcon } from "./KhaanaLogo";
-
 export default function SplashScreen() {
-  const [phase, setPhase] = useState<"visible" | "fading" | "gone">("visible");
-
-  useEffect(() => {
-    const showTimer = setTimeout(() => {
-      setPhase("fading");
-    }, 2000);
-
-    const removeTimer = setTimeout(() => {
-      setPhase("gone");
-    }, 2500);
-
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(removeTimer);
-    };
-  }, []);
-
-  if (phase === "gone") return null;
-
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#1B512D",
-        opacity: phase === "fading" ? 0 : 1,
-        transition: "opacity 0.5s ease-out",
-        overflow: "hidden",
-      }}
-    >
+    <>
       {/* Animated background glow */}
       <div style={{
         position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
         width: "300px",
         height: "300px",
         borderRadius: "50%",
@@ -68,6 +34,12 @@ export default function SplashScreen() {
 
       {/* Main content */}
       <div style={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}>
+      <div style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -77,15 +49,18 @@ export default function SplashScreen() {
         {/* Logo icon */}
         <div style={{
           position: "relative",
-          width: "88px",
-          height: "88px",
+          width: "100px",
+          height: "100px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           animation: "splashIconIn 0.6s ease-out both",
           animationDelay: "0.2s",
         }}>
           {/* Outer ring */}
           <div style={{
             position: "absolute",
-            inset: "-8px",
+            inset: "-10px",
             borderRadius: "50%",
             border: "2px solid rgba(173,193,120,0.3)",
             animation: "splashRingSpin 4s linear infinite",
@@ -111,12 +86,21 @@ export default function SplashScreen() {
             animation: "splashPulse 2s ease-in-out infinite",
           }} />
 
-          {/* Khaana Logo Icon */}
+          {/* Khaana Logo SVG */}
           <div style={{
             animation: "splashLeafBounce 2s ease-in-out infinite",
             animationDelay: "0.5s",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}>
-            <KhaanaIcon size="lg" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/khaana-logo-nobg.svg"
+              alt="Khaana"
+              width={100}
+              height={100}
+            />
           </div>
         </div>
 
@@ -128,12 +112,12 @@ export default function SplashScreen() {
         }}>
           <h1 style={{
             fontSize: "42px",
-            fontWeight: 800,
+            fontWeight: 700,
             color: "#FFFFFF",
             letterSpacing: "-1px",
             margin: 0,
             lineHeight: 1.1,
-            fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+            fontFamily: "var(--font-sour-gummy), system-ui, sans-serif",
           }}>
             {"Khaana".split("").map((char, i) => (
               <span
@@ -197,6 +181,7 @@ export default function SplashScreen() {
           ))}
         </div>
       </div>
+      </div>
 
       {/* Bottom branding accent */}
       <div style={{
@@ -223,8 +208,8 @@ export default function SplashScreen() {
       {/* CSS Animations */}
       <style>{`
         @keyframes splashGlow {
-          0%, 100% { transform: scale(1); opacity: 0.5; }
-          50% { transform: scale(1.3); opacity: 1; }
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+          50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
         }
 
         @keyframes splashFloat {
@@ -289,6 +274,6 @@ export default function SplashScreen() {
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
-    </div>
+    </>
   );
 }

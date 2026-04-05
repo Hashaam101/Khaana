@@ -1,15 +1,38 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
+  /* Brand colors */
   --color-forest: #1B512D;
   --color-forest-dark: #143F22;
   --color-forest-light: #237A3D;
   --color-olivine: #ADC178;
   --color-olivine-light: #C8D9A0;
-  --color-olivine-pale: #E8F0D8;
-  --color-cream: #F9F7F2;
+  --color-olivine-pale: var(--olivine-pale);
+  --color-cream: var(--cream);
   --color-warm-gray: #6B7280;
   --color-light-gray: #F3F4F6;
+
+  /* Semantic surface colors (auto-switch light/dark) */
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-inset: var(--surface-inset);
+
+  /* Semantic content/text colors */
+  --color-content: var(--content);
+  --color-content-secondary: var(--content-secondary);
+  --color-content-tertiary: var(--content-tertiary);
+  --color-content-muted: var(--content-muted);
+  --color-content-faint: var(--content-faint);
+
+  /* Semantic border colors */
+  --color-edge: var(--edge);
+  --color-edge-strong: var(--edge-strong);
+  --color-edge-stronger: var(--edge-stronger);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -17,10 +40,63 @@
 :root {
   --background: #ffffff;
   --foreground: #1a1a1a;
+
+  /* Accent surfaces */
+  --olivine-pale: #E8F0D8;
+  --cream: #F9F7F2;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-secondary: #f9fafb;
+  --surface-tertiary: #f3f4f6;
+  --surface-inset: #e5e7eb;
+
+  /* Content */
+  --content: #111827;
+  --content-secondary: #4b5563;
+  --content-tertiary: #6b7280;
+  --content-muted: #9ca3af;
+  --content-faint: #d1d5db;
+
+  /* Borders */
+  --edge: #f3f4f6;
+  --edge-strong: #e5e7eb;
+  --edge-stronger: #d1d5db;
+}
+
+.dark {
+  --background: #060a06;
+  --foreground: #edf5ed;
+
+  /* Accent surfaces */
+  --olivine-pale: #0e1710;
+  --cream: #14150e;
+
+  /* Surfaces */
+  --surface: #060a06;
+  --surface-secondary: #0c1410;
+  --surface-tertiary: #142218;
+  --surface-inset: #1e3222;
+
+  /* Content */
+  --content: #f0f7f0;
+  --content-secondary: #cce0d0;
+  --content-tertiary: #a8d0b0;
+  --content-muted: #7eaa88;
+  --content-faint: #4a7052;
+
+  /* Borders */
+  --edge: #1a2e20;
+  --edge-strong: #2a4430;
+  --edge-stronger: #3a5e42;
 }
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  overscroll-behavior: none;
 }
 
 body {
@@ -42,10 +118,11 @@ body {
 .app-shell {
   max-width: 430px;
   margin: 0 auto;
-  background: #ffffff;
-  min-height: 100vh;
+  background: var(--surface);
+  min-height: 100dvh;
   position: relative;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
 
 /* Smooth transitions for bottom nav */
@@ -78,12 +155,12 @@ body {
   animation: subtle-pulse 2s infinite;
 }
 
-/* Map placeholder styling */
+/* Map grid styling */
 .map-grid {
   background-image:
-    linear-gradient(rgba(173, 193, 120, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(173, 193, 120, 0.1) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(173, 193, 120, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(173, 193, 120, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Progress bar animation */
@@ -94,3 +171,38 @@ body {
 .progress-bar {
   animation: progress-fill 1s ease-out forwards;
 }
+
+/* Skeleton overlay — covers content for 1s then vanishes (pure CSS, no JS needed) */
+@keyframes skeleton-reveal {
+  0%, 85% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+.skeleton-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--surface);
+  max-width: 430px;
+  margin: 0 auto;
+  pointer-events: none;
+  animation: skeleton-reveal 1.15s ease-out forwards;
+}
+
+/* Splash overlay — full-screen splash that auto-hides after ~2.5s (pure CSS) */
+@keyframes splash-dismiss {
+  0%, 75% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1B512D;
+  overflow: hidden;
+  pointer-events: none;
+  animation: splash-dismiss 2.8s ease-out forwards;
+}
+

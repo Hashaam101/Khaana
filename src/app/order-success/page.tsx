@@ -8,13 +8,28 @@ import { KhaanaIcon } from "@/components/KhaanaLogo";
 export default function OrderSuccessPage() {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
+  const shareText = "I just rescued a Surprise Bag with Khaana! Save food, save money. #KhaanaHero";
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shareText);
+    } catch { /* fallback */ }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Khaana Hero", text: shareText });
+      } catch { /* cancelled */ }
+    } else {
+      handleCopy();
+    }
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-dvh bg-surface">
       <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
         {/* Success Illustration */}
         <div className="relative mb-8">
@@ -41,10 +56,10 @@ export default function OrderSuccessPage() {
           <span className="absolute top-4 -left-6 text-lg">🌟</span>
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-2xl font-bold text-content mb-2">
           You&apos;re a hero!
         </h1>
-        <p className="text-gray-600 text-sm leading-relaxed max-w-[280px]">
+        <p className="text-content-secondary text-sm leading-relaxed max-w-[280px]">
           Thanks for saving good food from going to waste. Your Khaana Bag is
           reserved and waiting for you!
         </p>
@@ -52,12 +67,12 @@ export default function OrderSuccessPage() {
         {/* Order Details */}
         <div className="w-full bg-olivine-pale rounded-xl p-4 mt-6 text-left">
           <p className="text-sm font-semibold text-forest">Pickup reminder</p>
-          <p className="text-xs text-gray-600 mt-1">
+          <p className="text-xs text-content-secondary mt-1">
             Remember to collect your bag during the pickup window. Show this
             screen at the store.
           </p>
-          <div className="mt-3 bg-white rounded-lg p-3 border border-olivine/30">
-            <p className="text-xs text-gray-500">Order reference</p>
+          <div className="mt-3 bg-surface rounded-lg p-3 border border-olivine/30 dark:border-olivine/50">
+            <p className="text-xs text-content-tertiary">Order reference</p>
             <p className="font-mono font-bold text-forest text-lg mt-0.5">
               KH-2025-0405
             </p>
@@ -71,16 +86,19 @@ export default function OrderSuccessPage() {
         <div className="flex gap-4 mt-4">
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-xl text-sm font-medium text-gray-700"
+            className="flex items-center gap-2 px-4 py-2 bg-surface-tertiary rounded-xl text-sm font-medium text-content-secondary"
           >
             {copied ? (
-              <Check size={16} className="text-green-500" />
+              <Check size={16} className="text-green-500 dark:text-green-400" />
             ) : (
               <Copy size={16} />
             )}
             {copied ? "Copied!" : "Copy link"}
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-forest text-white rounded-xl text-sm font-medium">
+          <button
+            onClick={handleShare}
+            className="flex items-center gap-2 px-4 py-2 bg-forest text-white rounded-xl text-sm font-medium"
+          >
             <Share2 size={16} />
             Share
           </button>
@@ -97,7 +115,7 @@ export default function OrderSuccessPage() {
         </Link>
         <Link
           href="/profile"
-          className="block w-full py-3.5 bg-gray-100 text-gray-700 font-bold rounded-2xl text-center text-base"
+          className="block w-full py-3.5 bg-surface-tertiary text-content-secondary font-bold rounded-2xl text-center text-base"
         >
           View my orders
         </Link>

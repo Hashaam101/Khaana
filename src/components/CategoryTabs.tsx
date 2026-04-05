@@ -17,7 +17,7 @@ export default function CategoryTabs({ active, onChange }: CategoryTabsProps) {
           className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
             active === cat.id
               ? "bg-forest text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              : "bg-surface-tertiary text-content-secondary hover:bg-surface-inset"
           }`}
         >
           {cat.label}

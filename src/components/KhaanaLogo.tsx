@@ -112,13 +112,14 @@ export function KhaanaIcon({ size = "md", className }: KhaanaIconProps) {
  * KhaanaLogo
  *
  * Horizontal lockup: KhaanaIcon + "Khaana" wordmark.
+ * Uses currentColor for the text so it adapts to dark mode.
  */
 export function KhaanaLogo({ size = "md", className }: KhaanaLogoProps) {
   const dims = logoDimensions[size];
 
   return (
     <div
-      className={className}
+      className={`text-forest dark:text-olivine-light ${className || ""}`}
       style={{
         display: "inline-flex",
         alignItems: "center",
@@ -137,10 +138,10 @@ export function KhaanaLogo({ size = "md", className }: KhaanaLogoProps) {
         <text
           x="0"
           y="58"
-          fontFamily="'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
-          fontWeight="800"
+          fontFamily="var(--font-sour-gummy), 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          fontWeight="700"
           fontSize="62"
-          fill={FOREST}
+          fill="currentColor"
           letterSpacing="-1"
         >
           Khaana
