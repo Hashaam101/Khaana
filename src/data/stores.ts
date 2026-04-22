@@ -1,0 +1,479 @@
+export interface Store {
+  id: string;
+  name: string;
+  category: string;
+  categoryType: "meals" | "bakery" | "groceries" | "sweets" | "cafe";
+  rating: number;
+  reviewCount: number;
+  originalPrice: number;
+  discountedPrice: number;
+  pickupTime: string;
+  pickupDay: string;
+  distance: string;
+  address: string;
+  area: string;
+  description: string;
+  gradient: string;
+  imageUrl: string;
+  emoji: string;
+  initial: string;
+  initialBg: string;
+  isFavorite: boolean;
+  available: number;
+  pickupRating: number;
+  valueRating: number;
+}
+
+export const stores: Store[] = [
+  {
+    id: "savour-foods",
+    name: "Savour Foods",
+    category: "Meals",
+    categoryType: "meals",
+    rating: 4.7,
+    reviewCount: 342,
+    originalPrice: 1200,
+    discountedPrice: 450,
+    pickupTime: "20:00 - 21:00",
+    pickupDay: "Today",
+    distance: "1.2 km",
+    address: "F-7 Markaz, Jinnah Super, Islamabad",
+    area: "F-7",
+    description:
+      "Rescue a Surprise Bag of delicious chicken pulao, chapli kabab, and other famous Savour specialties. Items may include their signature dishes that haven't sold by closing time.",
+    gradient: "linear-gradient(135deg, #E8890C 0%, #D4740A 50%, #B85C08 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&h=600&fit=crop",
+    emoji: "🍛",
+    initial: "S",
+    initialBg: "#E8890C",
+    isFavorite: true,
+    available: 3,
+    pickupRating: 4.6,
+    valueRating: 4.9,
+  },
+  {
+    id: "monal-restaurant",
+    name: "Monal Restaurant",
+    category: "Meals",
+    categoryType: "meals",
+    rating: 4.8,
+    reviewCount: 521,
+    originalPrice: 3500,
+    discountedPrice: 1200,
+    pickupTime: "21:30 - 22:30",
+    pickupDay: "Today",
+    distance: "5.8 km",
+    address: "Pir Sohawa Road, Margalla Hills, Islamabad",
+    area: "Margalla Hills",
+    description:
+      "Save premium BBQ platters, karahi dishes, and continental items from Islamabad's most iconic hilltop restaurant. Contents vary based on the day's remaining buffet items.",
+    gradient: "linear-gradient(135deg, #1B6B3A 0%, #0D4F2A 50%, #083D1F 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1567932783552-e305bbf70b63?w=800&h=600&fit=crop",
+    emoji: "🏔️",
+    initial: "M",
+    initialBg: "#1B6B3A",
+    isFavorite: false,
+    available: 2,
+    pickupRating: 4.5,
+    valueRating: 4.8,
+  },
+  {
+    id: "burning-brownie",
+    name: "Burning Brownie",
+    category: "Bread & pastries",
+    categoryType: "bakery",
+    rating: 4.6,
+    reviewCount: 189,
+    originalPrice: 1800,
+    discountedPrice: 650,
+    pickupTime: "19:00 - 20:00",
+    pickupDay: "Today",
+    distance: "0.8 km",
+    address: "F-6 Markaz, Super Market, Islamabad",
+    area: "F-6",
+    description:
+      "Grab a bag of artisan brownies, croissants, pastries, and baked treats. Our Surprise Bag may include chocolate cakes, muffins, and seasonal specialties.",
+    gradient: "linear-gradient(135deg, #5C3317 0%, #4A2612 50%, #3D1F0D 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1636743715220-d8f8dd900b87?w=800&h=600&fit=crop",
+    emoji: "🧁",
+    initial: "B",
+    initialBg: "#5C3317",
+    isFavorite: true,
+    available: 5,
+    pickupRating: 4.7,
+    valueRating: 4.5,
+  },
+  {
+    id: "tehzeeb-bakers",
+    name: "Tehzeeb Bakers",
+    category: "Bread & pastries",
+    categoryType: "bakery",
+    rating: 4.4,
+    reviewCount: 267,
+    originalPrice: 1500,
+    discountedPrice: 500,
+    pickupTime: "20:30 - 21:30",
+    pickupDay: "Today",
+    distance: "2.1 km",
+    address: "F-10 Markaz, Islamabad",
+    area: "F-10",
+    description:
+      "Rescue fresh bread, cakes, pastries, and biscuits from one of Islamabad's favorite bakery chains. Every bag is a sweet surprise!",
+    gradient: "linear-gradient(135deg, #E88DAD 0%, #D4728F 50%, #C05A78 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1674560819864-c2e1232f413e?w=800&h=600&fit=crop",
+    emoji: "🍰",
+    initial: "T",
+    initialBg: "#D4728F",
+    isFavorite: false,
+    available: 8,
+    pickupRating: 4.3,
+    valueRating: 4.6,
+  },
+  {
+    id: "jalal-sons",
+    name: "Jalal Sons",
+    category: "Groceries",
+    categoryType: "groceries",
+    rating: 4.5,
+    reviewCount: 156,
+    originalPrice: 2500,
+    discountedPrice: 850,
+    pickupTime: "21:00 - 22:00",
+    pickupDay: "Today",
+    distance: "1.5 km",
+    address: "F-6 Markaz, Kohsar Market, Islamabad",
+    area: "F-6",
+    description:
+      "Save premium imported groceries, fresh produce, dairy items, and deli products. The bag may include cheeses, fruits, vegetables, and packaged goods nearing their best-by date.",
+    gradient: "linear-gradient(135deg, #2D8B4E 0%, #1F7039 50%, #165A2D 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1642889366268-1fd09fa3c5ba?w=800&h=600&fit=crop",
+    emoji: "🛒",
+    initial: "J",
+    initialBg: "#2D8B4E",
+    isFavorite: false,
+    available: 4,
+    pickupRating: 4.4,
+    valueRating: 4.7,
+  },
+  {
+    id: "kabul-restaurant",
+    name: "Kabul Restaurant",
+    category: "Meals",
+    categoryType: "meals",
+    rating: 4.3,
+    reviewCount: 198,
+    originalPrice: 1600,
+    discountedPrice: 550,
+    pickupTime: "21:00 - 22:00",
+    pickupDay: "Tomorrow",
+    distance: "3.2 km",
+    address: "Blue Area, Jinnah Avenue, Islamabad",
+    area: "Blue Area",
+    description:
+      "Enjoy a Surprise Bag with Afghani pulao, kababs, mantu, and bolani. A taste of Central Asian cuisine at a fraction of the price.",
+    gradient: "linear-gradient(135deg, #B84C35 0%, #A33D28 50%, #8C3020 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1694004602524-33c11ad120f2?w=800&h=600&fit=crop",
+    emoji: "🥘",
+    initial: "K",
+    initialBg: "#B84C35",
+    isFavorite: false,
+    available: 2,
+    pickupRating: 4.2,
+    valueRating: 4.4,
+  },
+  {
+    id: "chaaye-khana",
+    name: "Chaaye Khana",
+    category: "Cafe",
+    categoryType: "cafe",
+    rating: 4.5,
+    reviewCount: 312,
+    originalPrice: 1400,
+    discountedPrice: 500,
+    pickupTime: "20:00 - 21:00",
+    pickupDay: "Today",
+    distance: "1.0 km",
+    address: "F-7 Markaz, Safa Gold Mall, Islamabad",
+    area: "F-7",
+    description:
+      "Save artisan sandwiches, wraps, baked goods, and desi chai accompaniments from Islamabad's beloved tea house. Perfect for a cozy evening snack!",
+    gradient: "linear-gradient(135deg, #8B6914 0%, #725510 50%, #5C440D 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1628702774354-f09e4a167a8e?w=800&h=600&fit=crop",
+    emoji: "☕",
+    initial: "C",
+    initialBg: "#8B6914",
+    isFavorite: true,
+    available: 3,
+    pickupRating: 4.6,
+    valueRating: 4.5,
+  },
+  {
+    id: "des-pardes",
+    name: "Des Pardes",
+    category: "Meals",
+    categoryType: "meals",
+    rating: 4.2,
+    reviewCount: 145,
+    originalPrice: 1800,
+    discountedPrice: 600,
+    pickupTime: "21:30 - 22:30",
+    pickupDay: "Tomorrow",
+    distance: "1.8 km",
+    address: "F-7, Jinnah Super Market, Islamabad",
+    area: "F-7",
+    description:
+      "Rescue authentic desi food - nihari, haleem, biryani, and more. The perfect Surprise Bag for lovers of traditional Pakistani cuisine.",
+    gradient: "linear-gradient(135deg, #6B1D3A 0%, #5A1630 50%, #491027 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1512010151537-2cf5c638ad51?w=800&h=600&fit=crop",
+    emoji: "🍖",
+    initial: "D",
+    initialBg: "#6B1D3A",
+    isFavorite: false,
+    available: 1,
+    pickupRating: 4.1,
+    valueRating: 4.3,
+  },
+  {
+    id: "rahat-bakers",
+    name: "Rahat Bakers",
+    category: "Bread & pastries",
+    categoryType: "bakery",
+    rating: 4.3,
+    reviewCount: 223,
+    originalPrice: 1200,
+    discountedPrice: 400,
+    pickupTime: "19:30 - 20:30",
+    pickupDay: "Today",
+    distance: "4.5 km",
+    address: "I-8 Markaz, Islamabad",
+    area: "I-8",
+    description:
+      "Grab a bag of fresh bread, rusks, cakes, and savoury pastries from this popular neighborhood bakery. Great value for families!",
+    gradient: "linear-gradient(135deg, #D4A438 0%, #BF8F28 50%, #A67B1E 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1547033999-d7a819ea1e85?w=800&h=600&fit=crop",
+    emoji: "🍞",
+    initial: "R",
+    initialBg: "#D4A438",
+    isFavorite: false,
+    available: 6,
+    pickupRating: 4.2,
+    valueRating: 4.5,
+  },
+  {
+    id: "street1-cafe",
+    name: "Street 1 Cafe",
+    category: "Cafe",
+    categoryType: "cafe",
+    rating: 4.4,
+    reviewCount: 178,
+    originalPrice: 1600,
+    discountedPrice: 550,
+    pickupTime: "20:00 - 21:00",
+    pickupDay: "Today",
+    distance: "0.9 km",
+    address: "F-6/3, Street 1, Islamabad",
+    area: "F-6",
+    description:
+      "Save gourmet burgers, loaded fries, smoothie bowls, and cafe favourites. A perfect surprise for casual food lovers.",
+    gradient: "linear-gradient(135deg, #2196A4 0%, #1A7A85 50%, #146068 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1550949875-181c4577566b?w=800&h=600&fit=crop",
+    emoji: "🍔",
+    initial: "S1",
+    initialBg: "#2196A4",
+    isFavorite: false,
+    available: 4,
+    pickupRating: 4.3,
+    valueRating: 4.4,
+  },
+  {
+    id: "tandoori-islamabad",
+    name: "Tandoori Restaurant",
+    category: "Meals",
+    categoryType: "meals",
+    rating: 4.1,
+    reviewCount: 134,
+    originalPrice: 2000,
+    discountedPrice: 700,
+    pickupTime: "21:00 - 22:00",
+    pickupDay: "Tomorrow",
+    distance: "3.0 km",
+    address: "F-10/3, Islamabad",
+    area: "F-10",
+    description:
+      "Rescue smoky tandoori chicken, fresh naan, seekh kababs, and raita. Authentic tandoor flavours you won't want to miss.",
+    gradient: "linear-gradient(135deg, #CC4400 0%, #B33A00 50%, #993100 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1615557960916-5f4791effe9d?w=800&h=600&fit=crop",
+    emoji: "🔥",
+    initial: "T",
+    initialBg: "#CC4400",
+    isFavorite: false,
+    available: 3,
+    pickupRating: 4.0,
+    valueRating: 4.2,
+  },
+  {
+    id: "kohsar-greens",
+    name: "Kohsar Market Greens",
+    category: "Groceries",
+    categoryType: "groceries",
+    rating: 4.6,
+    reviewCount: 89,
+    originalPrice: 1800,
+    discountedPrice: 600,
+    pickupTime: "18:00 - 19:00",
+    pickupDay: "Today",
+    distance: "1.4 km",
+    address: "Kohsar Market, F-6/3, Islamabad",
+    area: "F-6",
+    description:
+      "Fresh seasonal vegetables, herbs, and fruits from local farms. Save perfectly good produce that would otherwise go unsold.",
+    gradient: "linear-gradient(135deg, #4CAF50 0%, #388E3C 50%, #2E7D32 100%)",
+    imageUrl: "https://images.unsplash.com/photo-1759003103614-11427d946af0?w=800&h=600&fit=crop",
+    emoji: "🥬",
+    initial: "KG",
+    initialBg: "#4CAF50",
+    isFavorite: false,
+    available: 7,
+    pickupRating: 4.5,
+    valueRating: 4.8,
+  },
+];
+
+export const categories = [
+  { id: "all", label: "All" },
+  { id: "meals", label: "Meals" },
+  { id: "bakery", label: "Bread & pastries" },
+  { id: "groceries", label: "Groceries" },
+  { id: "cafe", label: "Cafe" },
+  { id: "sweets", label: "Sweets" },
+];
+
+export const userProfile = {
+  name: "Ayesha Khan",
+  email: "ayesha.khan@email.com",
+  co2Avoided: 23.4,
+  co2Equivalent: "equivalent to 116 cups of coffee",
+  moneySaved: 8750,
+  mealsRescued: 34,
+  joinedDate: "March 2025",
+};
+
+export const pendingOrder = {
+  storeName: "Burning Brownie",
+  storeInitial: "B",
+  storeInitialBg: "#5C3317",
+  collectTime: "19:00 - 20:00",
+  collectDate: "5 April",
+  status: "Pending collection",
+};
+
+export interface MonthlyPlan {
+  name: string;
+  bagsPerMonth: number;
+  pricePerMonth: number;
+  savingsPercent: number;
+  description: string;
+}
+
+// Impact page data
+export interface WeeklyDay {
+  day: string;
+  meals: number;
+  date: string;
+}
+
+export interface MonthlyImpact {
+  month: string;
+  meals: number;
+  co2: number;
+  saved: number;
+}
+
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  earned: boolean;
+  date?: string;
+  progress?: number;
+  target?: number;
+}
+
+export interface CommunityImpact {
+  totalMealsRescued: number;
+  totalUsers: number;
+  totalCo2Saved: number;
+  totalMoneySaved: number;
+  topCategory: string;
+  activeStores: number;
+}
+
+export const weeklyActivity: WeeklyDay[] = [
+  { day: "Mon", meals: 2, date: "31 Mar" },
+  { day: "Tue", meals: 0, date: "1 Apr" },
+  { day: "Wed", meals: 1, date: "2 Apr" },
+  { day: "Thu", meals: 3, date: "3 Apr" },
+  { day: "Fri", meals: 0, date: "4 Apr" },
+  { day: "Sat", meals: 2, date: "5 Apr" },
+  { day: "Sun", meals: 1, date: "6 Apr" },
+];
+
+export const monthlyHistory: MonthlyImpact[] = [
+  { month: "Mar 2026", meals: 14, co2: 9.6, saved: 3800 },
+  { month: "Feb 2026", meals: 10, co2: 6.8, saved: 2550 },
+  { month: "Jan 2026", meals: 6, co2: 4.1, saved: 1400 },
+  { month: "Dec 2025", meals: 4, co2: 2.9, saved: 1000 },
+];
+
+export const achievements: Achievement[] = [
+  { id: "first-rescue", name: "First Rescue", description: "Rescued your first meal", icon: "🌱", earned: true, date: "Dec 2025" },
+  { id: "regular-saver", name: "Regular Saver", description: "Rescued 10 meals", icon: "⭐", earned: true, date: "Jan 2026" },
+  { id: "eco-warrior", name: "Eco Warrior", description: "Saved 10kg CO₂", icon: "🌍", earned: true, date: "Feb 2026" },
+  { id: "food-hero", name: "Food Hero", description: "Rescued 25 meals", icon: "🦸", earned: true, date: "Mar 2026" },
+  { id: "money-master", name: "Money Master", description: "Saved Rs. 5,000", icon: "💰", earned: true, date: "Mar 2026" },
+  { id: "gold-rescuer", name: "Gold Rescuer", description: "Rescue 50 meals", icon: "🏆", earned: false, progress: 34, target: 50 },
+  { id: "planet-guardian", name: "Planet Guardian", description: "Save 50kg CO₂", icon: "🌿", earned: false, progress: 23, target: 50 },
+  { id: "super-saver", name: "Super Saver", description: "Save Rs. 25,000", icon: "💎", earned: false, progress: 8750, target: 25000 },
+];
+
+export const communityImpact: CommunityImpact = {
+  totalMealsRescued: 12450,
+  totalUsers: 2340,
+  totalCo2Saved: 8500,
+  totalMoneySaved: 3200000,
+  topCategory: "Meals",
+  activeStores: 48,
+};
+
+export const environmentalEquivalents = [
+  { value: "116", label: "cups of chai", icon: "☕", description: "The energy saved equals brewing 116 cups" },
+  { value: "12", label: "car trips avoided", icon: "🚗", description: "From Islamabad to Rawalpindi and back" },
+  { value: "3", label: "trees worth", icon: "🌳", description: "CO₂ absorbed by 3 trees in a month" },
+  { value: "340", label: "litres of water", icon: "💧", description: "Water saved from food production" },
+  { value: "17", label: "kg food waste", icon: "🗑️", description: "Diverted from landfills" },
+];
+
+export const monthlyPlans: MonthlyPlan[] = [
+  {
+    name: "Starter",
+    bagsPerMonth: 4,
+    pricePerMonth: 1600,
+    savingsPercent: 15,
+    description: "1 Surprise Bag per week",
+  },
+  {
+    name: "Regular",
+    bagsPerMonth: 8,
+    pricePerMonth: 2800,
+    savingsPercent: 25,
+    description: "2 Surprise Bags per week",
+  },
+  {
+    name: "Super Saver",
+    bagsPerMonth: 12,
+    pricePerMonth: 3600,
+    savingsPercent: 35,
+    description: "3 Surprise Bags per week",
+  },
+];
