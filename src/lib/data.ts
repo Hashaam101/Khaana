@@ -91,6 +91,92 @@ export const dietaryOptions = [
   "High Protein",
 ];
 
+// Admin interfaces & mock data
+export interface Order {
+  id: string;
+  customer: string;
+  storeName: string;
+  items: string[];
+  total: number;
+  status: "pending" | "confirmed" | "picked_up" | "delivered" | "cancelled";
+  date: string;
+}
+
+export interface AdminStats {
+  totalOrders: number;
+  totalDeliveries: number;
+  totalRevenue: number;
+  totalCustomers: number;
+  mealsSaved: number;
+  activeStores: number;
+  ordersThisWeek: number;
+  revenueThisWeek: number;
+  monthlyOrders: { month: string; orders: number; revenue: number }[];
+  topStores: { name: string; orders: number; revenue: number }[];
+}
+
+export interface Storefront {
+  id: string;
+  name: string;
+  category: string;
+  owner: string;
+  email: string;
+  phone: string;
+  address: string;
+  totalOrders: number;
+  revenue: number;
+  rating: number;
+  status: "active" | "inactive" | "pending";
+  joinedDate: string;
+}
+
+export const adminStats: AdminStats = {
+  totalOrders: 1847,
+  totalDeliveries: 1623,
+  totalRevenue: 734500,
+  totalCustomers: 892,
+  mealsSaved: 1623,
+  activeStores: 6,
+  ordersThisWeek: 127,
+  revenueThisWeek: 48300,
+  monthlyOrders: [
+    { month: "Nov", orders: 210, revenue: 84000 },
+    { month: "Dec", orders: 285, revenue: 112500 },
+    { month: "Jan", orders: 320, revenue: 128000 },
+    { month: "Feb", orders: 298, revenue: 119200 },
+    { month: "Mar", orders: 367, revenue: 146800 },
+    { month: "Apr", orders: 367, revenue: 144000 },
+  ],
+  topStores: [
+    { name: "Mithai Palace", orders: 421, revenue: 168400 },
+    { name: "Naan Stop", orders: 312, revenue: 93600 },
+    { name: "Karachi Biryani House", orders: 234, revenue: 81900 },
+    { name: "Lahore Bakers", orders: 189, revenue: 47250 },
+    { name: "Tikka Express", orders: 156, revenue: 78000 },
+    { name: "Roll Junction", orders: 98, revenue: 19600 },
+  ],
+};
+
+export const recentOrders: Order[] = [
+  { id: "ORD-1847", customer: "Ahmed Khan", storeName: "Karachi Biryani House", items: ["Chicken Biryani", "Raita"], total: 350, status: "delivered", date: "2026-04-22" },
+  { id: "ORD-1846", customer: "Fatima Ali", storeName: "Lahore Bakers", items: ["Croissants", "Cake Slices"], total: 250, status: "picked_up", date: "2026-04-22" },
+  { id: "ORD-1845", customer: "Hassan Raza", storeName: "Tikka Express", items: ["Chicken Tikka", "Naan"], total: 500, status: "confirmed", date: "2026-04-22" },
+  { id: "ORD-1844", customer: "Sara Malik", storeName: "Naan Stop", items: ["Dal Makhni", "Tandoori Naan"], total: 300, status: "pending", date: "2026-04-22" },
+  { id: "ORD-1843", customer: "Usman Shah", storeName: "Mithai Palace", items: ["Gulab Jamun", "Barfi"], total: 400, status: "delivered", date: "2026-04-21" },
+  { id: "ORD-1842", customer: "Ayesha Nawaz", storeName: "Roll Junction", items: ["Chicken Roll", "Fries"], total: 200, status: "cancelled", date: "2026-04-21" },
+  { id: "ORD-1841", customer: "Bilal Ahmed", storeName: "Karachi Biryani House", items: ["Chicken Biryani", "Naan"], total: 350, status: "delivered", date: "2026-04-21" },
+  { id: "ORD-1840", customer: "Zainab Iqbal", storeName: "Tikka Express", items: ["Seekh Kebab", "Chutney"], total: 500, status: "delivered", date: "2026-04-20" },
+];
+
+export const storefronts: Storefront[] = [
+  { id: "1", name: "Karachi Biryani House", category: "Biryani", owner: "Imran Siddiqui", email: "imran@kbh.pk", phone: "+92 321 1234567", address: "Block 7, Clifton, Karachi", totalOrders: 234, revenue: 81900, rating: 4.7, status: "active", joinedDate: "2025-09-15" },
+  { id: "2", name: "Lahore Bakers", category: "Bakery", owner: "Amina Butt", email: "amina@lahorebakers.pk", phone: "+92 300 9876543", address: "MM Alam Road, Gulberg, Lahore", totalOrders: 189, revenue: 47250, rating: 4.5, status: "active", joinedDate: "2025-10-01" },
+  { id: "3", name: "Tikka Express", category: "BBQ", owner: "Farhan Qureshi", email: "farhan@tikkaexpress.pk", phone: "+92 333 4567890", address: "F-7 Markaz, Islamabad", totalOrders: 156, revenue: 78000, rating: 4.3, status: "active", joinedDate: "2025-10-20" },
+  { id: "4", name: "Naan Stop", category: "Desi", owner: "Rashida Begum", email: "rashida@naanstop.pk", phone: "+92 312 3456789", address: "Saddar, Rawalpindi", totalOrders: 312, revenue: 93600, rating: 4.6, status: "active", joinedDate: "2025-08-10" },
+  { id: "5", name: "Roll Junction", category: "Fast Food", owner: "Kamran Yousuf", email: "kamran@rolljunction.pk", phone: "+92 345 6789012", address: "Burns Garden, Karachi", totalOrders: 98, revenue: 19600, rating: 4.2, status: "inactive", joinedDate: "2025-11-05" },
+  { id: "6", name: "Mithai Palace", category: "Sweets", owner: "Nasreen Akhtar", email: "nasreen@mithaipalace.pk", phone: "+92 301 2345678", address: "Liberty Market, Lahore", totalOrders: 421, revenue: 168400, rating: 4.8, status: "active", joinedDate: "2025-07-20" },
+];
+
 export const stores: Store[] = [
   {
     id: "1",

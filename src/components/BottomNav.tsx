@@ -9,6 +9,10 @@ export default function BottomNav() {
   const { theme } = useTheme();
 
   void theme;
+
+  // Hide on admin routes
+  if (pathname.startsWith("/admin")) return null;
+
   const activeColor = "#ADC178";
   const inactiveColor = "rgba(255,255,255,0.45)";
 

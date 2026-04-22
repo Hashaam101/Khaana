@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Header from "@/components/Header";
 import CategoryChips from "@/components/CategoryChips";
 import BagCard from "@/components/BagCard";
-import { stores, photos } from "@/lib/data";
+import { stores, photos, adminStats } from "@/lib/data";
 
 export default function Home() {
   const [category, setCategory] = useState("All");
@@ -22,8 +23,24 @@ export default function Home() {
     <>
       <Header />
 
+      {/* Stats widget */}
+      <div className="mx-4 mt-4 grid grid-cols-3 gap-2">
+        <div className="bg-khaana-dark rounded-2xl p-3 text-center">
+          <p className="text-xl font-bold text-khaana-light">{adminStats.ordersThisWeek}</p>
+          <p className="text-[10px] text-white/60 mt-0.5">Orders today</p>
+        </div>
+        <div className="bg-khaana-dark rounded-2xl p-3 text-center">
+          <p className="text-xl font-bold text-khaana-light">{adminStats.mealsSaved.toLocaleString()}</p>
+          <p className="text-[10px] text-white/60 mt-0.5">Meals saved</p>
+        </div>
+        <div className="bg-khaana-dark rounded-2xl p-3 text-center">
+          <p className="text-xl font-bold text-khaana-light">{adminStats.activeStores}</p>
+          <p className="text-[10px] text-white/60 mt-0.5">Active stores</p>
+        </div>
+      </div>
+
       {/* Hero banner */}
-      <div className="relative h-44 mx-4 mt-4 rounded-2xl overflow-hidden">
+      <div className="relative h-44 mx-4 mt-3 rounded-2xl overflow-hidden">
         <Image
           src={photos.fatherDaughterDesi}
           alt="Save food with Khaana"
@@ -52,9 +69,9 @@ export default function Home() {
         <section className="mt-2">
           <div className="flex items-center justify-between px-4 mb-3">
             <h2 className="font-bold text-base">Recommended for you</h2>
-            <button className="text-khaana-dark dark:text-khaana-light text-sm font-medium">
+            <Link href="/browse" className="text-khaana-dark dark:text-khaana-light text-sm font-medium">
               See all
-            </button>
+            </Link>
           </div>
           <div className="flex gap-3 overflow-x-auto hide-scrollbar px-4 pb-2">
             {recommended.map((store) => (
@@ -71,9 +88,9 @@ export default function Home() {
             {category === "All" ? "Nearby" : category}
           </h2>
           {category === "All" && (
-            <button className="text-khaana-dark dark:text-khaana-light text-sm font-medium">
+            <Link href="/browse" className="text-khaana-dark dark:text-khaana-light text-sm font-medium">
               See all
-            </button>
+            </Link>
           )}
         </div>
         <div className="flex flex-col gap-3">
